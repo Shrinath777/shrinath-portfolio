@@ -293,6 +293,35 @@ img {
 }
 
 /* Hero entrance animations */
+.hero-avatar {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto var(--space-lg);
+  border-radius: 50%;
+  padding: 4px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  animation: heroFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.hero-avatar img.profile-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--bg-base);
+}
+
+.hero-title {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: translateY(20px);
+  animation: heroFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+}
 .hero-greeting {
   font-family: var(--font-body);
   font-size: 1.1rem;
@@ -1350,6 +1379,425 @@ img {
   outline: 2px solid var(--violet);
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* ============================================================
+   ABOUT GRID (structured cards)
+   ============================================================ */
+.about-intro {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text);
+  margin-bottom: var(--space-lg);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.about-card {
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(139, 92, 246, 0.08);
+}
+
+.about-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-sm);
+}
+
+.about-card-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.about-icon {
+  font-size: 1.2rem;
+  color: var(--violet);
+}
+
+.about-card p {
+  font-size: 0.92rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   SKILL CATEGORY HEADER (icon + label)
+   ============================================================ */
+.skill-category-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-md);
+}
+
+.skill-category-icon {
+  font-size: 1.3rem;
+  color: var(--violet);
+}
+
+/* ============================================================
+   EDUCATION SECTION
+   ============================================================ */
+.education-card {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+}
+
+.education-icon-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.education-main-icon {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+.education-degree {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+}
+
+.education-branch {
+  font-size: 1rem;
+  color: var(--violet);
+  font-weight: 500;
+  margin-bottom: var(--space-sm);
+}
+
+.education-college,
+.education-year {
+  font-size: 0.92rem;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.education-inline-icon {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   CERTIFICATIONS SECTION
+   ============================================================ */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.cert-card {
+  padding: var(--space-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.cert-icon {
+  font-size: 2rem;
+  color: var(--golden);
+}
+
+.cert-name {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.cert-issuer {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.cert-score {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--emerald);
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 10px;
+  border-radius: 12px;
+}
+
+.cert-link {
+  font-size: 0.85rem;
+  color: var(--violet);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.cert-link:hover {
+  color: var(--violet-deep);
+}
+
+/* ============================================================
+   ACHIEVEMENTS SECTION
+   ============================================================ */
+.achievements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-md);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.achievement-card {
+  padding: var(--space-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.achievement-icon {
+  font-size: 2rem;
+  color: var(--coral);
+}
+
+.achievement-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+.achievement-desc {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   RESEARCH SECTION
+   ============================================================ */
+.research-card {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: var(--space-xl);
+  text-align: left;
+}
+
+.research-icon {
+  font-size: 2rem;
+  color: var(--violet);
+  margin-bottom: var(--space-md);
+}
+
+.research-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: var(--space-md);
+}
+
+.research-abstract {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.research-meta {
+  margin-bottom: var(--space-md);
+}
+
+.research-venue {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--violet);
+  background: rgba(139, 92, 246, 0.08);
+  padding: 4px 12px;
+  border-radius: 12px;
+}
+
+.research-actions {
+  margin-top: var(--space-sm);
+}
+
+/* ============================================================
+   CONTACT FORM
+   ============================================================ */
+.contact-form-container {
+  max-width: 600px;
+  margin: var(--space-xl) auto 0;
+  padding: var(--space-xl);
+}
+
+.contact-form-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text-bright);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: var(--space-lg);
+}
+
+.contact-form-icon {
+  color: var(--violet);
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+  color: var(--text-bright);
+  font-family: var(--font-body);
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--violet);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.contact-submit {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+}
+
+.contact-icon {
+  font-size: 1.5rem;
+  color: var(--violet);
+}
+
+/* ============================================================
+   FOOTER (updated with social links)
+   ============================================================ */
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.footer-links {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--violet);
+  transform: translateY(-2px);
+}
+
+.footer-heart {
+  color: var(--coral);
+  vertical-align: middle;
+  margin: 0 2px;
+}
+
+/* ============================================================
+   RESPONSIVE — NEW SECTIONS
+   ============================================================ */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .education-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .education-college,
+  .education-year {
+    justify-content: center;
+  }
+  
+  .certs-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .achievements-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .hero-avatar {
+    width: 110px;
+    height: 110px;
+  }
+  
+  .hero-title {
+    font-size: 1.1rem;
+  }
+  
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact-form-container {
+    padding: var(--space-lg);
+  }
 }
 
 /* ============================================================

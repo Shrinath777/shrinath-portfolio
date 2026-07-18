@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiDownload, FiArrowRight, FiMail } from 'react-icons/fi';
 
 function Hero() {
   const scrollTo = (e, id) => {
@@ -10,26 +11,37 @@ function Hero() {
   return (
     <section id="hero" className="hero">
       <div className="hero-content animate-on-scroll">
-        <p className="hero-greeting">Hello, I'm</p>
-        <h1 className="hero-name">Shrinath Sureshbabu</h1>
+        <div className="hero-avatar">
+          <img src="/assets/profile.jpg" alt="Shrinath Sureshbabu" className="profile-img" />
+        </div>
+        <p className="hero-greeting">Hi, I'm</p>
+        <h1 className="hero-name">Shrinath S</h1>
+        <h2 className="hero-title">Electronics & Communication Engineer | IoT & Full-Stack Developer</h2>
         <p className="hero-tagline">
-          ECE student who builds things that connect the physical world to the
-          digital — from sensor circuits to full-stack dashboards.
+          I build IoT solutions, embedded systems, and modern web applications. 
+          Bridging the physical world to the digital with precision and performance.
         </p>
         <div className="hero-buttons">
           <a
-            href="#projects"
+            href="/assets/resume.pdf"
+            download
             className="btn btn-primary"
+          >
+            <FiDownload style={{ marginRight: '8px' }} /> Download Resume
+          </a>
+          <a
+            href="#projects"
+            className="btn btn-outline"
             onClick={(e) => scrollTo(e, '#projects')}
           >
-            See My Work
+            <FiArrowRight style={{ marginRight: '8px' }} /> View Projects
           </a>
           <a
             href="#contact"
             className="btn btn-outline"
             onClick={(e) => scrollTo(e, '#contact')}
           >
-            Get In Touch
+            <FiMail style={{ marginRight: '8px' }} /> Contact Me
           </a>
         </div>
       </div>
