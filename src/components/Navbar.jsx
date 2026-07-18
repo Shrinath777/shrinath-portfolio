@@ -20,7 +20,6 @@ function Navbar() {
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
 
-      // Active section detection (only on home page)
       if (location.pathname === '/') {
         const sections = navLinks.map((l) => l.href.replace('#', ''));
         let current = '';
@@ -49,14 +48,14 @@ function Navbar() {
         if (target) {
           target.scrollIntoView({ behavior: 'smooth' });
         }
-      }, 100);
+      }, 200);
     }
   }, [location]);
 
   const handleLinkClick = (e, href) => {
     e.preventDefault();
     setMenuOpen(false);
-    
+
     if (location.pathname !== '/') {
       navigate('/' + href);
     } else {
@@ -67,10 +66,20 @@ function Navbar() {
     }
   };
 
+  const handleBrandClick = (e) => {
+    e.preventDefault();
+    setMenuOpen(false);
+    if (location.pathname !== '/') {
+      navigate('/');
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   return (
     <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="navbar-inner">
-        <a href="#hero" className="navbar-brand" onClick={(e) => handleLinkClick(e, '#hero')}>
+        <a href="/" className="navbar-brand" onClick={handleBrandClick}>
           SS<span className="brand-dot">.</span>
         </a>
 

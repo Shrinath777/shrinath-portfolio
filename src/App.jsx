@@ -14,25 +14,23 @@ import Background from './components/Background';
 
 function HomePage() {
   useEffect(() => {
-    // Small delay to let the DOM render before observing
+    let observer = null;
+
+    // Force all animate-on-scroll elements visible immediately
+    // This prevents blank page when navigating back
+    const scrollElements = document.querySelectorAll('.animate-on-scroll');
+    scrollElements.forEach((el) => {
+      el.classList.add('visible');
+    });
+
+    // Then set up observer for any elements added later via dynamic content
     const timer = setTimeout(() => {
-      const scrollElements = document.querySelectorAll('.animate-on-scroll');
-
-      // Immediately reveal elements already in the viewport
-      scrollElements.forEach((el) => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-          el.classList.add('visible');
-        }
-      });
-
-      // Observe the remaining hidden elements for scroll reveal
       const observerOptions = {
         threshold: 0.08,
         rootMargin: '0px 0px -40px 0px',
       };
 
-      const observer = new IntersectionObserver((entries) => {
+      observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
@@ -41,16 +39,15 @@ function HomePage() {
         });
       }, observerOptions);
 
-      scrollElements.forEach((el) => {
-        if (!el.classList.contains('visible')) {
-          observer.observe(el);
-        }
-      });
+      // Re-query in case new elements appeared
+      const newElements = document.querySelectorAll('.animate-on-scroll:not(.visible)');
+      newElements.forEach((el) => observer.observe(el));
+    }, 100);
 
-      return () => observer.disconnect();
-    }, 50);
-
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      if (observer) observer.disconnect();
+    };
   }, []);
 
   return (
