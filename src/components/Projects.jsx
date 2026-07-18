@@ -1,141 +1,89 @@
-import React, { useRef, useCallback } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { FiExternalLink, FiGithub, FiArrowRight } from 'react-icons/fi';
+import { FiGithub, FiExternalLink, FiArrowRight } from 'react-icons/fi';
 
 const projects = [
   {
     name: 'Heritage Sentinel',
     slug: 'heritage',
-    description:
-      'Real-time IoT environmental monitoring for heritage sites. Used ESP32, temperature/humidity/gas sensors, Node.js dashboard, and SMS alerts to protect monuments.',
-    tech: ['ESP32', 'Node.js', 'Express', 'Sensors', 'Twilio SMS', 'Web Dashboard'],
-    liveUrl: 'https://heritage-sentinel-ui.vercel.app',
+    description: 'Real-time IoT environmental monitoring for heritage sites. ESP32, sensors, Node.js dashboard, and SMS alerts to protect monuments.',
+    tech: ['ESP32', 'Node.js', 'Express', 'Sensors', 'Twilio SMS'],
     repoUrl: 'https://github.com/Shrinath777/heritage-sentinel',
+    liveUrl: 'https://heritage-sentinel-ui.vercel.app',
   },
   {
     name: 'TailMate',
     slug: 'tailmate',
-    description:
-      'A pet matchmaking app where dog owners find compatible playmates. Built with React Native and Supabase for real-time chat and profile matching.',
-    tech: ['React Native', 'Supabase', 'Node.js', 'Expo', 'Real-time Chat'],
-    liveUrl: 'https://github.com/Shrinath777/tailmate-app',
+    description: 'A pet matchmaking app where dog owners find compatible playmates. Built with React Native and Supabase for real-time chat.',
+    tech: ['React Native', 'Supabase', 'Node.js', 'Expo'],
     repoUrl: 'https://github.com/Shrinath777/tailmate-app',
+    liveUrl: 'https://github.com/Shrinath777/tailmate-app',
   },
   {
     name: 'Farmer Services',
     slug: 'farmer',
-    description:
-      'A rural workflow platform connecting farmers to tools, market prices, and local services. Built with Node.js and Express.',
-    tech: ['Node.js', 'Express', 'Firebase', 'HTML/CSS', 'REST APIs'],
-    liveUrl: 'https://github.com/Shrinath777/farmer-services',
+    description: 'A rural workflow platform connecting farmers to tools, market prices, and local services.',
+    tech: ['Node.js', 'Express', 'Firebase', 'REST APIs'],
     repoUrl: 'https://github.com/Shrinath777/farmer-services',
+    liveUrl: 'https://github.com/Shrinath777/farmer-services',
   },
   {
     name: 'RFID Dashboard',
     slug: 'rfid',
-    description:
-      'An access control system using RFID cards and ESP32. Tracks entries on a live web dashboard with authentication.',
-    tech: ['ESP32', 'RFID RC522', 'Node.js', 'Firebase', 'Web Frontend'],
-    liveUrl: 'https://rfid-dashboard-ui.vercel.app',
+    description: 'An access control system using RFID cards and ESP32. Tracks entries on a live web dashboard with authentication.',
+    tech: ['ESP32', 'RFID RC522', 'Node.js', 'Firebase'],
     repoUrl: 'https://github.com/Shrinath777/RFID-dashboard',
+    liveUrl: 'https://rfid-dashboard-ui.vercel.app',
   },
   {
     name: 'Dual Axis Solar Tracker',
     slug: 'solar',
-    description:
-      'Hardware project that aligns solar panels to sunlight using LDR sensors and servo motors for maximum energy capture.',
-    tech: ['Arduino', 'LDR Sensors', 'Servo Motors', 'Embedded C', 'PCB Design'],
-    liveUrl: 'https://github.com/Shrinath777/solar-tracker',
+    description: 'Hardware project that aligns solar panels to sunlight using LDR sensors and servo motors for maximum energy capture.',
+    tech: ['Arduino', 'LDR Sensors', 'Servo Motors', 'PCB Design'],
     repoUrl: 'https://github.com/Shrinath777/solar-tracker',
+    liveUrl: 'https://github.com/Shrinath777/solar-tracker',
   },
   {
     name: 'CuraBot',
     slug: 'curabot',
-    description:
-      'An AI-powered differential diagnosis chatbot for TCS hackathon. Analyzes symptoms and suggests possible conditions with confidence scores.',
-    tech: ['Python', 'FastAPI', 'Vite', 'React', 'AI/ML', 'Supabase'],
-    liveUrl: 'https://curabot-ui.vercel.app',
+    description: 'An AI-powered differential diagnosis chatbot. Analyzes symptoms and suggests possible conditions with confidence scores.',
+    tech: ['Python', 'FastAPI', 'React', 'Supabase', 'AI/ML'],
     repoUrl: 'https://github.com/Shrinath777/Curabot',
+    liveUrl: 'https://curabot-ui.vercel.app',
   },
 ];
-
-function ProjectCard({ project, index }) {
-  const cardRef = useRef(null);
-
-  const handleMouseMove = useCallback((e) => {
-    const card = cardRef.current;
-    if (!card) return;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
-
-    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-  }, []);
-
-  const handleMouseLeave = useCallback(() => {
-    const card = cardRef.current;
-    if (!card) return;
-    card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-  }, []);
-
-  return (
-    <div
-      ref={cardRef}
-      className={`project-card glass-card animate-on-scroll stagger-${index + 1}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="project-card-content">
-        <h3 className="project-name">{project.name}</h3>
-        <p className="project-description">{project.description}</p>
-        <div className="tech-pills">
-          {project.tech.map((t) => (
-            <span key={t} className="tech-pill">
-              {t}
-            </span>
-          ))}
-        </div>
-        <div className="project-actions">
-          <Link to={`/project/${project.slug}`} className="btn btn-small btn-primary">
-            <FiArrowRight style={{ marginRight: '6px' }} /> Know More
-          </Link>
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-small btn-outline"
-          >
-            <FiGithub style={{ marginRight: '6px' }} /> GitHub
-          </a>
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-small btn-outline"
-          >
-            <FiExternalLink style={{ marginRight: '6px' }} /> Live Demo
-          </a>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function Projects() {
   return (
     <section id="projects" className="section projects-section">
-      <h2 className="section-title animate-on-scroll">Projects</h2>
-      <p className="section-subtitle animate-on-scroll">
-        Things I've actually built and shipped.
-      </p>
+      <h2 className="section-title animate-on-scroll">
+        <span className="pixel-accent">LATEST RELEASES</span>
+        Projects
+      </h2>
+      <p className="section-subtitle animate-on-scroll">Things I've actually built and shipped.</p>
 
-      <div className="projects-grid">
-        {projects.map((project, i) => (
-          <ProjectCard key={project.slug} project={project} index={i} />
+      <div className="projects-grid animate-on-scroll stagger-1">
+        {projects.map((project) => (
+          <div key={project.slug} className="project-card">
+            <h3 className="project-name">{project.name}</h3>
+            <p className="project-description">{project.description}</p>
+            <div className="tech-pills">
+              {project.tech.map((t) => (
+                <span key={t} className="tech-pill">{t}</span>
+              ))}
+            </div>
+            <div className="project-actions">
+              <Link to={`/project/${project.slug}`} className="btn btn-small btn-primary">
+                <FiArrowRight style={{ marginRight: '6px' }} /> Know More
+              </Link>
+              <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-outline">
+                <FiGithub style={{ marginRight: '6px' }} /> GitHub
+              </a>
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-cyan">
+                <FiExternalLink style={{ marginRight: '6px' }} /> Live
+              </a>
+            </div>
+          </div>
         ))}
       </div>
     </section>
