@@ -1,10 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { FiGithub, FiExternalLink, FiArrowRight } from 'react-icons/fi';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -21,7 +17,7 @@ const projects = [
     description: 'A complete dog care mobile app for health tracking, activity logging, and community support. Built with React Native and Supabase.',
     tech: ['React Native', 'Supabase', 'Node.js', 'Expo'],
     repoUrl: 'https://github.com/Shrinath777/tailmate-app',
-    liveUrl: 'https://tailmate-new1.vercel.app', // Deployed frontend
+    liveUrl: 'https://tailmate-new1.vercel.app',
   },
   {
     name: 'RFID Dashboard',
@@ -57,55 +53,17 @@ const projects = [
 ];
 
 function Projects() {
-  const containerRef = useRef(null);
-  const sectionRef = useRef(null);
-  const trackRef = useRef(null);
-
-  useEffect(() => {
-    let ctx = gsap.context(() => {
-      const track = trackRef.current;
-      const section = sectionRef.current;
-      
-      if (!track || !section) return;
-
-      const getScrollAmount = () => {
-        let trackWidth = track.scrollWidth;
-        return -(trackWidth - window.innerWidth + 100); // 100px padding adjustment
-      };
-
-      const tween = gsap.to(track, {
-        x: getScrollAmount,
-        ease: "none"
-      });
-
-      ScrollTrigger.create({
-        trigger: section,
-        start: "top top",
-        end: () => `+=${getScrollAmount() * -1}`,
-        pin: true,
-        animation: tween,
-        scrub: 1,
-        invalidateOnRefresh: true
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <div ref={containerRef}>
-      <section id="projects" className="projects-section-horizontal" ref={sectionRef}>
-        <div className="projects-header">
-        <h2 className="section-title">
-          <span className="pixel-accent">LATEST RELEASES</span>
-          Projects
-        </h2>
-        <p className="section-subtitle">Things I've actually built and shipped. (Scroll down)</p>
-      </div>
+    <section id="projects" className="section projects-section">
+      <h2 className="section-title animate-on-scroll">
+        <span className="pixel-accent">LATEST RELEASES</span>
+        Projects
+      </h2>
+      <p className="section-subtitle animate-on-scroll">Things I've actually built and shipped.</p>
 
-      <div className="projects-horizontal-track" ref={trackRef}>
+      <div className="projects-grid animate-on-scroll stagger-1">
         {projects.map((project) => (
-          <div key={project.slug} className="project-card horizontal-card">
+          <div key={project.slug} className="project-card">
             <h3 className="project-name">{project.name}</h3>
             <p className="project-description">{project.description}</p>
             <div className="tech-pills">
@@ -122,25 +80,14 @@ function Projects() {
               </a>
               {project.liveUrl && (
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-cyan">
-                  <FiExternalLink style={{ marginRight: '6px' }} /> Live (Vercel)
+                  <FiExternalLink style={{ marginRight: '6px' }} /> Live
                 </a>
-              )}
-              {project.backendUrl && (
-                <a href={project.backendUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-outline" style={{ borderColor: '#2563eb', color: '#60a5fa' }}>
-                  <FiExternalLink style={{ marginRight: '6px' }} /> API (Render)
-                </a>
-              )}
-              {project.comingSoon && (
-                <span className="btn btn-small project-coming-soon">
-                  🚀 Coming Soon
-                </span>
               )}
             </div>
           </div>
         ))}
       </div>
     </section>
-    </div>
   );
 }
 

@@ -953,46 +953,19 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
-   12. PROJECTS HORIZONTAL SCROLL
+   12. PROJECTS GRID
    ============================================================ */
-.projects-section-horizontal {
+.projects-section {
   position: relative;
-  overflow: hidden;
-  height: 100vh; /* Will be pinned by GSAP */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   background: var(--bg-base);
-  scroll-margin-top: 80px;
 }
 
-/* Fallback: if GSAP fails to pin, allow horizontal scroll */
-.projects-section-horizontal:not(.pin-spacer *) {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.projects-header {
-  padding: 0 var(--space-lg);
-  margin-bottom: var(--space-2xl);
-  max-width: 1100px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.projects-horizontal-track {
-  display: flex;
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: var(--space-xl);
-  padding: 0 var(--space-lg);
-  width: max-content;
-  /* Add padding to right so last card doesn't touch the edge */
-  padding-right: 100px;
-}
-
-.horizontal-card {
-  width: 380px;
-  flex-shrink: 0;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
 /* Project card */
@@ -1004,6 +977,8 @@ img { max-width: 100%; display: block; }
   padding: var(--space-xl);
   box-shadow: var(--shadow-card), var(--shadow-pixel);
   transition: var(--transition-base);
+  display: flex;
+  flex-direction: column;
 }
 
 .project-card:hover {
@@ -1024,6 +999,7 @@ img { max-width: 100%; display: block; }
   color: var(--text);
   line-height: 1.7;
   margin-bottom: var(--space-lg);
+  flex-grow: 1;
 }
 
 .tech-pills {
@@ -1050,6 +1026,8 @@ img { max-width: 100%; display: block; }
   gap: var(--space-md);
   flex-wrap: wrap;
   align-items: center;
+  margin-top: auto;
+  padding-top: var(--space-sm);
 }
 
 .project-coming-soon {
@@ -1981,19 +1959,11 @@ a.contact-list-item:hover .contact-list-icon {
   .ach-grid { grid-template-columns: repeat(2, 1fr); }
   .ach-item--large { grid-column: span 2; }
 
-  /* Projects: vertical scroll fallback on mobile */
-  .projects-section-horizontal {
-    height: auto;
-    overflow: visible;
-    padding: var(--space-2xl) var(--space-md);
-  }
-  .projects-horizontal-track {
-    flex-direction: column;
-    width: 100%;
-    padding-right: 0;
+  /* Projects grid on mobile */
+  .projects-grid {
+    grid-template-columns: 1fr;
     gap: var(--space-lg);
   }
-  .horizontal-card { width: 100%; }
 }
 
 @media (max-width: 480px) {
