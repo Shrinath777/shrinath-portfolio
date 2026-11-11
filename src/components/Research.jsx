@@ -18,9 +18,12 @@ function Research() {
         <div className="research-meta">
           <span className="research-venue">IEEE Conference Publication</span>
         </div>
-        <div className="research-actions">
-          <a href="https://github.com/Shrinath777/heritage-sentinel" className="btn btn-small btn-primary" target="_blank" rel="noopener noreferrer">
-            <FiExternalLink style={{ marginRight: '6px' }} /> View Project & Paper
+        <div className="research-actions" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <a href="https://drive.google.com/file/d/1zPOfLbL9HIVp9vWpXxHX-hSoyJEwHZvo/view?usp=sharing" className="btn btn-small btn-primary" target="_blank" rel="noopener noreferrer">
+            <FiExternalLink style={{ marginRight: '6px' }} /> View Published Paper
+          </a>
+          <a href="https://github.com/Shrinath777/heritage-sentinel" className="btn btn-small btn-outline" target="_blank" rel="noopener noreferrer">
+            <FiExternalLink style={{ marginRight: '6px' }} /> View Project Code
           </a>
         </div>
       </div>

@@ -37,23 +37,6 @@ const projectsData = {
     repoUrl: 'https://github.com/Shrinath777/tailmate-app',
     color: 'var(--coral)',
   },
-  farmer: {
-    name: 'Farmer Services',
-    tagline: 'A digital platform connecting rural farmers to essential tools, market prices, and agricultural services.',
-    purpose: 'Small-scale farmers often lack access to real-time market prices, government schemes, and modern tools. Farmer Services bridges that gap with a simple, accessible web platform. The interface is designed to be intuitive even for first-time internet users, with large buttons, clear pricing, and a streamlined checkout flow.',
-    features: [
-      'Product catalog with categorized agricultural supplies',
-      'Shopping cart with real-time price calculation',
-      'User authentication with sign-up and login',
-      'Order tracking and delivery status updates',
-      'Responsive design optimized for mobile devices',
-      'Express.js backend with RESTful API architecture',
-    ],
-    tech: ['Node.js', 'Express', 'HTML5', 'CSS3', 'JavaScript', 'REST APIs', 'Responsive Design'],
-    liveUrl: 'https://farmer-services.vercel.app',
-    repoUrl: 'https://github.com/Shrinath777/farmer-services',
-    color: 'var(--cyan)',
-  },
   rfid: {
     name: 'RFID Dashboard',
     tagline: 'A smart access control system using RFID cards, ESP32 microcontrollers, and a real-time web dashboard.',

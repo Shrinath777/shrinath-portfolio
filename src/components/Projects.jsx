@@ -24,14 +24,6 @@ const projects = [
     liveUrl: 'https://tailmate-new1.vercel.app', // Deployed frontend
   },
   {
-    name: 'Farmer Services',
-    slug: 'farmer',
-    description: 'A rural workflow platform connecting farmers to tools, market prices, and local services.',
-    tech: ['Node.js', 'Express', 'Firebase', 'REST APIs'],
-    repoUrl: 'https://github.com/Shrinath777/farmer-services',
-    liveUrl: 'https://farmer-services.vercel.app',
-  },
-  {
     name: 'RFID Dashboard',
     slug: 'rfid',
     description: 'An access control system using RFID cards and ESP32. Tracks entries on a live web dashboard with authentication.',
