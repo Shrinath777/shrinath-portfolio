@@ -19,8 +19,8 @@ function Research() {
           <span className="research-venue">IEEE Conference Publication</span>
         </div>
         <div className="research-actions">
-          <a href="#" className="btn btn-small btn-primary" target="_blank" rel="noopener noreferrer">
-            <FiExternalLink style={{ marginRight: '6px' }} /> View Paper
+          <a href="https://github.com/Shrinath777/heritage-sentinel" className="btn btn-small btn-primary" target="_blank" rel="noopener noreferrer">
+            <FiExternalLink style={{ marginRight: '6px' }} /> View Project & Paper
           </a>
         </div>
       </div>

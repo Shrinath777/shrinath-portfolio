@@ -13,6 +13,7 @@ const projects = [
     description: 'Real-time IoT environmental monitoring for heritage sites. ESP32, sensors, Node.js dashboard, and SMS alerts to protect monuments.',
     tech: ['ESP32', 'Node.js', 'Express', 'Sensors', 'Twilio SMS'],
     repoUrl: 'https://github.com/Shrinath777/heritage-sentinel',
+    liveUrl: 'https://heritage-sentinel-ui.vercel.app',
   },
   {
     name: 'TailMate',
@@ -28,6 +29,7 @@ const projects = [
     description: 'A rural workflow platform connecting farmers to tools, market prices, and local services.',
     tech: ['Node.js', 'Express', 'Firebase', 'REST APIs'],
     repoUrl: 'https://github.com/Shrinath777/farmer-services',
+    liveUrl: 'https://farmer-services.vercel.app',
   },
   {
     name: 'RFID Dashboard',
@@ -50,6 +52,7 @@ const projects = [
     description: 'A unified web interface integrating multiple coding and placement platforms with responsive frontend design.',
     tech: ['React', 'Node.js', 'HTML5', 'CSS3'],
     repoUrl: 'https://github.com/Shrinath777/workspace',
+    liveUrl: 'https://workspace-platform-xi.vercel.app',
   },
   {
     name: 'CuraBot',
