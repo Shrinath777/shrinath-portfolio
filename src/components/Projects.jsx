@@ -72,7 +72,7 @@ function Projects() {
 
         const getScrollAmount = () => {
           let trackWidth = track.scrollWidth;
-          return -(trackWidth - window.innerWidth + 120);
+          return -(trackWidth - window.innerWidth + 40);
         };
 
         const tween = gsap.to(track, {

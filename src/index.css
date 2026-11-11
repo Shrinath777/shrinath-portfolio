@@ -959,12 +959,12 @@ img { max-width: 100%; display: block; }
   position: relative;
   overflow: hidden;
   height: 100vh;
-  min-height: 600px;
+  min-height: 540px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  padding-top: calc(75px + var(--space-xl));
-  padding-bottom: var(--space-xl);
+  padding-top: calc(65px + 16px);
+  padding-bottom: 20px;
   box-sizing: border-box;
   background: var(--bg-base);
   scroll-margin-top: 80px;
@@ -978,7 +978,7 @@ img { max-width: 100%; display: block; }
 
 .projects-header {
   padding: 0 var(--space-lg);
-  margin-bottom: var(--space-xl);
+  margin-bottom: 16px;
   max-width: 1100px;
   width: 100%;
   margin-left: auto;
@@ -988,7 +988,7 @@ img { max-width: 100%; display: block; }
 
 .projects-horizontal-track {
   display: flex;
-  gap: var(--space-xl);
+  gap: 24px;
   padding: 0 var(--space-lg);
   width: max-content;
   padding-right: 120px;
@@ -996,7 +996,7 @@ img { max-width: 100%; display: block; }
 }
 
 .horizontal-card {
-  width: 380px;
+  width: 410px;
   max-width: 85vw;
   flex-shrink: 0;
   display: flex;
@@ -1009,7 +1009,7 @@ img { max-width: 100%; display: block; }
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  padding: var(--space-xl);
+  padding: 22px 24px;
   box-shadow: var(--shadow-card), var(--shadow-pixel);
   transition: var(--transition-base);
   display: flex;
@@ -1023,31 +1023,32 @@ img { max-width: 100%; display: block; }
 
 .project-name {
   font-family: var(--font-heading);
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   font-weight: 700;
   color: var(--text-bright);
-  margin-bottom: var(--space-md);
+  margin-bottom: 10px;
+  line-height: 1.3;
 }
 
 .project-description {
-  font-size: 1.1rem;
+  font-size: 0.94rem;
   color: var(--text);
-  line-height: 1.7;
-  margin-bottom: var(--space-lg);
+  line-height: 1.55;
+  margin-bottom: 14px;
   flex-grow: 1;
 }
 
 .tech-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: var(--space-lg);
+  gap: 6px;
+  margin-bottom: 16px;
 }
 
 .tech-pill {
   font-family: var(--font-pixel);
-  font-size: 0.65rem;
-  padding: 5px 10px;
+  font-size: 0.62rem;
+  padding: 4px 8px;
   border: 1px solid rgba(6, 182, 212, 0.3);
   color: var(--cyan);
   border-radius: 4px;
@@ -1058,11 +1059,11 @@ img { max-width: 100%; display: block; }
 
 .project-actions {
   display: flex;
-  gap: var(--space-md);
+  gap: 8px;
   flex-wrap: wrap;
   align-items: center;
   margin-top: auto;
-  padding-top: var(--space-sm);
+  padding-top: 4px;
 }
 
 .project-coming-soon {
