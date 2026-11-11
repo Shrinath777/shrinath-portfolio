@@ -13,7 +13,6 @@ const projects = [
     description: 'Real-time IoT environmental monitoring for heritage sites. ESP32, sensors, Node.js dashboard, and SMS alerts to protect monuments.',
     tech: ['ESP32', 'Node.js', 'Express', 'Sensors', 'Twilio SMS'],
     repoUrl: 'https://github.com/Shrinath777/heritage-sentinel',
-    liveUrl: 'https://heritage-sentinel-ui.vercel.app',
   },
   {
     name: 'TailMate',
@@ -21,8 +20,7 @@ const projects = [
     description: 'A complete dog care mobile app for health tracking, activity logging, and community support. Built with React Native and Supabase.',
     tech: ['React Native', 'Supabase', 'Node.js', 'Expo'],
     repoUrl: 'https://github.com/Shrinath777/tailmate-app',
-    liveUrl: 'https://tailmate-app.vercel.app', // Deployed frontend
-    backendUrl: 'https://tailmate-backend.onrender.com', // Deployed backend
+    liveUrl: 'https://tailmate-new1.vercel.app', // Deployed frontend
   },
   {
     name: 'Farmer Services',
@@ -30,8 +28,6 @@ const projects = [
     description: 'A rural workflow platform connecting farmers to tools, market prices, and local services.',
     tech: ['Node.js', 'Express', 'Firebase', 'REST APIs'],
     repoUrl: 'https://github.com/Shrinath777/farmer-services',
-    liveUrl: 'https://farmer-services-ui.vercel.app',
-    backendUrl: 'https://farmer-services.onrender.com',
   },
   {
     name: 'RFID Dashboard',
