@@ -19,8 +19,8 @@ const contactLinks = [
   {
     icon: FiLinkedin,
     label: 'LinkedIn',
-    value: 'linkedin.com/in/shrinath',
-    href: 'https://linkedin.com/in/shrinath',
+    value: 'linkedin.com/in/shrinath-s-2b25ab254',
+    href: 'https://www.linkedin.com/in/shrinath-s-2b25ab254/',
     external: true,
   },
   {

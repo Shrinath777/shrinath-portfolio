@@ -1,27 +1,52 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const experiences = [
   {
     role: 'IoT Intern',
     company: 'Embessy Intelligence',
-    duration: 'Nov 2024 – May 2025',
+    duration: '6 Months – Present',
     points: [
-      'Built real-time IoT solutions with sensor integration and embedded systems',
-      'Worked on intelligent monitoring and deployment-ready systems',
+      'Developing real-time IoT solutions involving sensor integration and embedded system development.',
+      'Contributing to intelligent monitoring, data acquisition, and deployment-ready systems.',
     ],
   },
   {
-    role: 'IoT Intern',
+    role: 'Internet of Things Intern',
     company: 'Eazythings Technology Pvt. Ltd.',
-    duration: 'Jun 2024 – Jul 2024',
+    duration: 'June 2024 – July 2024',
     points: [
-      'Prototyped real-time IoT applications with sensors and actuators',
-      'Designed 2-layer PCB layouts, visualized data on ThingsBoard',
+      'Worked with sensors and actuators for real-time IoT applications and prototyping.',
+      'Designed 2-layer PCB layouts and implemented live data visualization using ThingsBoard.',
     ],
   },
 ];
 
 function Experience() {
+  const lineRef = useRef(null);
+
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      if (lineRef.current) {
+        gsap.to(lineRef.current, {
+          scaleY: 1,
+          transformOrigin: "top center",
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".timeline",
+            start: "top center",
+            end: "bottom center",
+            scrub: true,
+          }
+        });
+      }
+    });
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section id="experience" className="section experience-section">
       <h2 className="section-title animate-on-scroll">Experience</h2>
@@ -30,6 +55,8 @@ function Experience() {
       </p>
 
       <div className="timeline">
+        <div className="timeline-line-bg"></div>
+        <div className="timeline-line-animated" ref={lineRef}></div>
         {experiences.map((exp, i) => (
           <div
             key={exp.company}

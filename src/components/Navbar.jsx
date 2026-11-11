@@ -6,20 +6,24 @@ const navLinks = [
   { label: 'Projects', href: '#projects' },
   { label: 'Skills', href: '#skills' },
   { label: 'Experience', href: '#experience' },
-  { label: 'Game', href: '#game' },
+  { label: 'Certifications', href: '#certifications' },
+  { label: 'Achievements', href: '#achievements' },
+  { label: 'Research', href: '#research' },
   { label: 'Contact', href: '#contact' },
 ];
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
   useEffect(() => {
-    if (!isHome) return;
     const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+      if (!isHome) return;
       const sections = navLinks.map((l) => l.href.replace('#', ''));
       let current = '';
       for (const id of sections) {
@@ -53,18 +57,18 @@ function Navbar() {
   };
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar${scrolled ? ' scrolled' : ''}`}>
       <div className="nav-brand" onClick={handleBrandClick}>
         SS<span className="brand-cursor">_</span>
       </div>
 
       <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
-        <span />
-        <span />
-        <span />
+        <span className={menuOpen ? 'ham-open' : ''} />
+        <span className={menuOpen ? 'ham-open' : ''} />
+        <span className={menuOpen ? 'ham-open' : ''} />
       </button>
 
-      <ul className={`nav-links ${menuOpen ? 'open' : ''}`}>
+      <ul className={`nav-links${menuOpen ? ' open' : ''}`}>
         {navLinks.map((link) => (
           <li key={link.label}>
             <a

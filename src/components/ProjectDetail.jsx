@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { FiGithub, FiExternalLink } from 'react-icons/fi';
 
 const projectsData = {
   heritage: {
@@ -21,13 +22,13 @@ const projectsData = {
   },
   tailmate: {
     name: 'TailMate',
-    tagline: 'A pet matchmaking mobile app that helps dog owners find the perfect playmate for their furry companions.',
-    purpose: 'Every dog deserves a buddy. TailMate solves the problem of isolated pets in urban apartments by connecting dog owners in the same locality. Owners create detailed pet profiles, browse potential matches based on breed compatibility, temperament, and size, and chat in real-time to set up playdates.',
+    tagline: 'A comprehensive dog care mobile app that helps owners manage their pet\'s health, activities, and daily needs.',
+    purpose: 'TailMate is a complete dog care solution designed to simplify pet parenting. Instead of just matchmaking, it helps dog owners track their pet\'s health records, schedule veterinary appointments, log daily walks, and manage nutrition. Owners can also connect with local pet communities for advice and support.',
     features: [
-      'Swipe-based pet profile matching with compatibility scoring',
-      'Real-time messaging between matched pet owners',
-      'Pet profile creation with breed, age, temperament, and photo uploads',
-      'Location-based discovery of nearby pets',
+      'Comprehensive health tracking and vaccination reminders',
+      'Daily activity logging for walks and exercises',
+      'Nutrition and meal scheduling',
+      'Community forums to connect with other pet parents',
       'Supabase-powered backend with real-time subscriptions',
       'Cross-platform mobile app built with React Native and Expo',
     ],
@@ -83,7 +84,6 @@ const projectsData = {
       'No Arduino required — direct microcontroller implementation',
     ],
     tech: ['Embedded C', 'LDR Sensors', 'Servo Motors', 'PCB Design', 'Proteus Simulation', 'Hardware Prototyping'],
-    liveUrl: 'https://github.com/Shrinath777/solar-tracker',
     repoUrl: 'https://github.com/Shrinath777/solar-tracker',
     color: 'var(--emerald)',
   },
@@ -104,6 +104,21 @@ const projectsData = {
     repoUrl: 'https://github.com/Shrinath777/Curabot',
     color: 'var(--rose)',
   },
+  workspace: {
+    name: 'Workspace',
+    tagline: 'A unified learning platform integrating multiple coding and placement platforms.',
+    purpose: 'Students often struggle to track their progress across different coding platforms. Workspace provides a centralized interface to manage and track learning journeys from platforms like LeetCode, HackerRank, and GeeksforGeeks.',
+    features: [
+      'Centralized dashboard for tracking coding progress',
+      'Integration with multiple placement platforms',
+      'Responsive frontend design for mobile and desktop',
+      'Performance analytics and visualization',
+      'User-friendly unified interface',
+    ],
+    tech: ['React', 'Node.js', 'Express', 'HTML5', 'CSS3', 'REST API'],
+    repoUrl: 'https://github.com/Shrinath777/workspace',
+    color: 'var(--sky)',
+  },
 };
 
 function ProjectDetail() {
@@ -116,8 +131,8 @@ function ProjectDetail() {
 
   if (!project) {
     return (
-      <div className="detail-page">
-        <div className="detail-container">
+      <div className="project-detail">
+      <div className="detail-container">
           <Link to="/" className="detail-back">← Back to Portfolio</Link>
           <div className="detail-panel">
             <h1 className="detail-title">Project not found</h1>
@@ -129,7 +144,7 @@ function ProjectDetail() {
   }
 
   return (
-    <div className="detail-page">
+    <div className="project-detail">
       <div className="detail-container">
         <Link to="/" className="detail-back">← Back to Portfolio</Link>
 
@@ -169,24 +184,21 @@ function ProjectDetail() {
           </div>
         </div>
 
-        <div className="detail-actions">
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary"
-          >
-            View Live ↗
-          </a>
-          <a
-            href={project.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-outline"
-          >
-            Source Code ↗
-          </a>
-        </div>
+            <div className="detail-actions">
+              <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline">
+                <FiGithub style={{ marginRight: '8px' }} /> View Source
+              </a>
+              {project.liveUrl && (
+                <a 
+                  href={project.liveUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="btn btn-cyan"
+                >
+                  <FiExternalLink style={{ marginRight: '8px' }} /> Live Demo
+                </a>
+              )}
+            </div>
       </div>
     </div>
   );

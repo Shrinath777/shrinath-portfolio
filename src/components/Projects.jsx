@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FiGithub, FiExternalLink, FiArrowRight } from 'react-icons/fi';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -14,10 +18,11 @@ const projects = [
   {
     name: 'TailMate',
     slug: 'tailmate',
-    description: 'A pet matchmaking app where dog owners find compatible playmates. Built with React Native and Supabase for real-time chat.',
+    description: 'A complete dog care mobile app for health tracking, activity logging, and community support. Built with React Native and Supabase.',
     tech: ['React Native', 'Supabase', 'Node.js', 'Expo'],
     repoUrl: 'https://github.com/Shrinath777/tailmate-app',
-    liveUrl: 'https://github.com/Shrinath777/tailmate-app',
+    liveUrl: 'https://tailmate-app.vercel.app', // Deployed frontend
+    backendUrl: 'https://tailmate-backend.onrender.com', // Deployed backend
   },
   {
     name: 'Farmer Services',
@@ -25,13 +30,14 @@ const projects = [
     description: 'A rural workflow platform connecting farmers to tools, market prices, and local services.',
     tech: ['Node.js', 'Express', 'Firebase', 'REST APIs'],
     repoUrl: 'https://github.com/Shrinath777/farmer-services',
-    liveUrl: 'https://github.com/Shrinath777/farmer-services',
+    liveUrl: 'https://farmer-services-ui.vercel.app',
+    backendUrl: 'https://farmer-services.onrender.com',
   },
   {
     name: 'RFID Dashboard',
     slug: 'rfid',
     description: 'An access control system using RFID cards and ESP32. Tracks entries on a live web dashboard with authentication.',
-    tech: ['ESP32', 'RFID RC522', 'Node.js', 'Firebase'],
+    tech: ['ESP32', 'Node.js', 'React', 'MySQL'],
     repoUrl: 'https://github.com/Shrinath777/RFID-dashboard',
     liveUrl: 'https://rfid-dashboard-ui.vercel.app',
   },
@@ -41,7 +47,13 @@ const projects = [
     description: 'Hardware project that aligns solar panels to sunlight using LDR sensors and servo motors for maximum energy capture.',
     tech: ['Arduino', 'LDR Sensors', 'Servo Motors', 'PCB Design'],
     repoUrl: 'https://github.com/Shrinath777/solar-tracker',
-    liveUrl: 'https://github.com/Shrinath777/solar-tracker',
+  },
+  {
+    name: 'Workspace',
+    slug: 'workspace',
+    description: 'A unified web interface integrating multiple coding and placement platforms with responsive frontend design.',
+    tech: ['React', 'Node.js', 'HTML5', 'CSS3'],
+    repoUrl: 'https://github.com/Shrinath777/workspace',
   },
   {
     name: 'CuraBot',
@@ -54,17 +66,55 @@ const projects = [
 ];
 
 function Projects() {
-  return (
-    <section id="projects" className="section projects-section">
-      <h2 className="section-title animate-on-scroll">
-        <span className="pixel-accent">LATEST RELEASES</span>
-        Projects
-      </h2>
-      <p className="section-subtitle animate-on-scroll">Things I've actually built and shipped.</p>
+  const containerRef = useRef(null);
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
 
-      <div className="projects-grid animate-on-scroll stagger-1">
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      const track = trackRef.current;
+      const section = sectionRef.current;
+      
+      if (!track || !section) return;
+
+      const getScrollAmount = () => {
+        let trackWidth = track.scrollWidth;
+        return -(trackWidth - window.innerWidth + 100); // 100px padding adjustment
+      };
+
+      const tween = gsap.to(track, {
+        x: getScrollAmount,
+        ease: "none"
+      });
+
+      ScrollTrigger.create({
+        trigger: section,
+        start: "top top",
+        end: () => `+=${getScrollAmount() * -1}`,
+        pin: true,
+        animation: tween,
+        scrub: 1,
+        invalidateOnRefresh: true
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div ref={containerRef}>
+      <section id="projects" className="projects-section-horizontal" ref={sectionRef}>
+        <div className="projects-header">
+        <h2 className="section-title">
+          <span className="pixel-accent">LATEST RELEASES</span>
+          Projects
+        </h2>
+        <p className="section-subtitle">Things I've actually built and shipped. (Scroll down)</p>
+      </div>
+
+      <div className="projects-horizontal-track" ref={trackRef}>
         {projects.map((project) => (
-          <div key={project.slug} className="project-card">
+          <div key={project.slug} className="project-card horizontal-card">
             <h3 className="project-name">{project.name}</h3>
             <p className="project-description">{project.description}</p>
             <div className="tech-pills">
@@ -79,14 +129,27 @@ function Projects() {
               <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-outline">
                 <FiGithub style={{ marginRight: '6px' }} /> GitHub
               </a>
-              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-cyan">
-                <FiExternalLink style={{ marginRight: '6px' }} /> Live
-              </a>
+              {project.liveUrl && (
+                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-cyan">
+                  <FiExternalLink style={{ marginRight: '6px' }} /> Live (Vercel)
+                </a>
+              )}
+              {project.backendUrl && (
+                <a href={project.backendUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-outline" style={{ borderColor: '#2563eb', color: '#60a5fa' }}>
+                  <FiExternalLink style={{ marginRight: '6px' }} /> API (Render)
+                </a>
+              )}
+              {project.comingSoon && (
+                <span className="btn btn-small project-coming-soon">
+                  🚀 Coming Soon
+                </span>
+              )}
             </div>
           </div>
         ))}
       </div>
     </section>
+    </div>
   );
 }
 

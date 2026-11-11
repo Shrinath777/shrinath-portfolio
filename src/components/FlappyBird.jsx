@@ -15,28 +15,28 @@ const BIRD_H = 22;
 const BIRD_X = 70;
 
 const COLORS = {
-  bg: '#0d1117',
-  bgGrad1: '#0d1117',
-  bgGrad2: '#161b22',
-  bird: '#00ff88',
-  birdDark: '#00cc6a',
+  bg: '#71c5cf',
+  bgGrad1: '#71c5cf',
+  bgGrad2: '#71c5cf',
+  bird: '#f4b41a', // orange/yellow bird
+  birdDark: '#e37719', // darker orange
   birdEye: '#ffffff',
-  birdPupil: '#0d1117',
-  birdBeak: '#ffd700',
-  pipe: '#00e5ff',
-  pipeDark: '#00b8d4',
-  pipeLight: '#33eeff',
-  pipeCap: '#00e5ff',
-  pipeCapDark: '#009bb3',
-  ground: '#1a1f2b',
-  groundLine: '#00e5ff',
-  groundDot: '#30363d',
-  text: '#ffd700',
-  textShadow: '#b8860b',
-  score: '#ffd700',
-  white: '#e6edf3',
-  overlay: 'rgba(13, 17, 23, 0.75)',
-  star: '#30363d',
+  birdPupil: '#000000',
+  birdBeak: '#ff6600',
+  pipe: '#73bf2e', // green pipe
+  pipeDark: '#558022', 
+  pipeLight: '#9ce659',
+  pipeCap: '#73bf2e',
+  pipeCapDark: '#558022',
+  ground: '#ded895', // sandy color
+  groundLine: '#d3c97e',
+  groundDot: '#d3c97e',
+  text: '#ffffff',
+  textShadow: '#543847',
+  score: '#ffffff',
+  white: '#ffffff',
+  overlay: 'rgba(0, 0, 0, 0.5)',
+  star: 'transparent',
 };
 
 const GAME_STATE = { IDLE: 0, PLAYING: 1, GAME_OVER: 2 };
@@ -500,7 +500,7 @@ const FlappyBird = () => {
     borderRadius: '4px',
     cursor: 'pointer',
     imageRendering: 'pixelated',
-    boxShadow: `0 0 20px rgba(0, 229, 255, 0.15), inset 0 0 60px rgba(0, 229, 255, 0.03)`,
+    boxShadow: `0 8px 0 rgba(0, 0, 0, 0.2)`,
     display: 'block',
   };
 

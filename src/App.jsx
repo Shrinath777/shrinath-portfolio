@@ -10,7 +10,8 @@ import Experience from './components/Experience';
 import Certifications from './components/Certifications';
 import Achievements from './components/Achievements';
 import Research from './components/Research';
-import FlappyBird from './components/FlappyBird';
+import FlappyBird from './components/FlappyBird'; // temporarily hidden
+
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ProjectDetail from './components/ProjectDetail';
@@ -55,7 +56,8 @@ function HomePage() {
       <Achievements />
       <Research />
       <Contact />
-      <FlappyBird />
+      {/* <FlappyBird /> */}{/* temporarily hidden — will be re-enabled after hosting */}
+
       <Footer />
     </>
   );

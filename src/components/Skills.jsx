@@ -1,36 +1,51 @@
 import React from 'react';
-import { FiCode, FiLayout, FiServer, FiDatabase, FiCpu, FiTool } from 'react-icons/fi';
+import { FiCode, FiCpu, FiDatabase, FiLayers, FiTool } from 'react-icons/fi';
 
 const skillCategories = [
   {
-    name: 'Programming',
+    id: 'languages',
+    name: 'Languages',
     icon: FiCode,
-    skills: ['C', 'C++', 'Python', 'JavaScript', 'HTML', 'CSS'],
+    color: '#8b5cf6',
+    bg: 'rgba(139, 92, 246, 0.08)',
+    border: 'rgba(139, 92, 246, 0.25)',
+    skills: ['JavaScript', 'Python', 'C / C++', 'Java', 'HTML5', 'CSS3'],
   },
   {
-    name: 'Frontend',
-    icon: FiLayout,
-    skills: ['React', 'Bootstrap', 'Tailwind CSS', 'Vite'],
+    id: 'frameworks',
+    name: 'Frameworks & Libraries',
+    icon: FiLayers,
+    color: '#06b6d4',
+    bg: 'rgba(6, 182, 212, 0.08)',
+    border: 'rgba(6, 182, 212, 0.25)',
+    skills: ['Node.js', 'Express.js', 'React', 'React Native', 'Bootstrap', 'FastAPI'],
   },
   {
-    name: 'Backend',
-    icon: FiServer,
-    skills: ['Node.js', 'Express.js', 'REST API', 'FastAPI'],
-  },
-  {
-    name: 'Database',
-    icon: FiDatabase,
-    skills: ['MongoDB', 'Firebase', 'Supabase', 'MySQL'],
-  },
-  {
-    name: 'Embedded & IoT',
+    id: 'iot',
+    name: 'IoT & Embedded',
     icon: FiCpu,
-    skills: ['ESP32', 'Arduino', 'Sensors & Actuators', 'PCB Design (KiCad)', 'ThingsBoard'],
+    color: '#10b981',
+    bg: 'rgba(16, 185, 129, 0.08)',
+    border: 'rgba(16, 185, 129, 0.25)',
+    skills: ['ESP32', 'Arduino', 'Sensors & Actuators', 'PCB Design (KiCad)', 'VLSI Design', 'ModelSim'],
   },
   {
-    name: 'Tools',
+    id: 'databases',
+    name: 'Databases & Cloud',
+    icon: FiDatabase,
+    color: '#f59e0b',
+    bg: 'rgba(245, 158, 11, 0.08)',
+    border: 'rgba(245, 158, 11, 0.25)',
+    skills: ['MongoDB Atlas', 'MySQL', 'Supabase', 'Firebase', 'ThingsBoard', 'REST APIs'],
+  },
+  {
+    id: 'tools',
+    name: 'Tools & Platforms',
     icon: FiTool,
-    skills: ['Git', 'GitHub', 'VS Code', 'Postman', 'Wokwi', 'Arduino IDE'],
+    color: '#ec4899',
+    bg: 'rgba(236, 72, 153, 0.08)',
+    border: 'rgba(236, 72, 153, 0.25)',
+    skills: ['GitHub', 'VS Code', 'Postman', 'Figma', 'Vercel', 'Socket.IO'],
   },
 ];
 
@@ -38,22 +53,42 @@ function Skills() {
   return (
     <section id="skills" className="section skills-section">
       <h2 className="section-title animate-on-scroll">Skills &amp; Tools</h2>
+      <p className="section-subtitle animate-on-scroll">
+        Hover any category to see the full list.
+      </p>
 
-      <div className="skills-grid">
-        {skillCategories.map((category, i) => {
-          const IconComponent = category.icon;
+      <div className="skills-accordion animate-on-scroll">
+        {skillCategories.map((cat, i) => {
+          const Icon = cat.icon;
           return (
             <div
-              key={category.name}
-              className={`skill-category glass-card animate-on-scroll stagger-${i + 1}`}
+              key={cat.id}
+              className="skill-row"
+              style={{
+                '--sk-color': cat.color,
+                '--sk-bg': cat.bg,
+                '--sk-border': cat.border,
+              }}
             >
-              <div className="skill-category-header">
-                <IconComponent className="skill-category-icon" />
-                <h3 className="skill-category-name">{category.name}</h3>
+              {/* Always-visible heading */}
+              <div className="skill-row-header">
+                <div className="skill-row-left">
+                  <span className="skill-row-num">0{i + 1}</span>
+                  <div className="skill-row-icon">
+                    <Icon />
+                  </div>
+                  <h3 className="skill-row-name">{cat.name}</h3>
+                </div>
+                <div className="skill-row-right">
+                  <span className="skill-row-count">{cat.skills.length} skills</span>
+                  <span className="skill-row-arrow">→</span>
+                </div>
               </div>
-              <div className="skill-items">
-                {category.skills.map((skill) => (
-                  <span key={skill} className="skill-item">
+
+              {/* Skills — revealed on hover */}
+              <div className="skill-row-pills">
+                {cat.skills.map((skill) => (
+                  <span key={skill} className="skill-pill">
                     {skill}
                   </span>
                 ))}
