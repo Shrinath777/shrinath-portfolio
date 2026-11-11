@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { FiGithub, FiExternalLink, FiArrowRight } from 'react-icons/fi';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
@@ -53,41 +57,83 @@ const projects = [
 ];
 
 function Projects() {
-  return (
-    <section id="projects" className="section projects-section">
-      <h2 className="section-title animate-on-scroll">
-        <span className="pixel-accent">LATEST RELEASES</span>
-        Projects
-      </h2>
-      <p className="section-subtitle animate-on-scroll">Things I've actually built and shipped.</p>
+  const containerRef = useRef(null);
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
 
-      <div className="projects-grid animate-on-scroll stagger-1">
-        {projects.map((project) => (
-          <div key={project.slug} className="project-card">
-            <h3 className="project-name">{project.name}</h3>
-            <p className="project-description">{project.description}</p>
-            <div className="tech-pills">
-              {project.tech.map((t) => (
-                <span key={t} className="tech-pill">{t}</span>
-              ))}
-            </div>
-            <div className="project-actions">
-              <Link to={`/project/${project.slug}`} className="btn btn-small btn-primary">
-                <FiArrowRight style={{ marginRight: '6px' }} /> Know More
-              </Link>
-              <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-outline">
-                <FiGithub style={{ marginRight: '6px' }} /> GitHub
-              </a>
-              {project.liveUrl && (
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-cyan">
-                  <FiExternalLink style={{ marginRight: '6px' }} /> Live
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      let mm = gsap.matchMedia();
+
+      mm.add("(min-width: 769px)", () => {
+        const track = trackRef.current;
+        const section = sectionRef.current;
+        if (!track || !section) return;
+
+        const getScrollAmount = () => {
+          let trackWidth = track.scrollWidth;
+          return -(trackWidth - window.innerWidth + 120);
+        };
+
+        const tween = gsap.to(track, {
+          x: getScrollAmount,
+          ease: "none"
+        });
+
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top top",
+          end: () => `+=${getScrollAmount() * -1}`,
+          pin: true,
+          animation: tween,
+          scrub: 1,
+          invalidateOnRefresh: true
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div ref={containerRef}>
+      <section id="projects" className="projects-section-horizontal" ref={sectionRef}>
+        <div className="projects-header">
+          <h2 className="section-title">
+            <span className="pixel-accent">LATEST RELEASES</span>
+            Projects
+          </h2>
+          <p className="section-subtitle">Things I've actually built and shipped.</p>
+        </div>
+
+        <div className="projects-horizontal-track" ref={trackRef}>
+          {projects.map((project) => (
+            <div key={project.slug} className="project-card horizontal-card">
+              <h3 className="project-name">{project.name}</h3>
+              <p className="project-description">{project.description}</p>
+              <div className="tech-pills">
+                {project.tech.map((t) => (
+                  <span key={t} className="tech-pill">{t}</span>
+                ))}
+              </div>
+              <div className="project-actions">
+                <Link to={`/project/${project.slug}`} className="btn btn-small btn-primary">
+                  <FiArrowRight style={{ marginRight: '6px' }} /> Know More
+                </Link>
+                <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-outline">
+                  <FiGithub style={{ marginRight: '6px' }} /> GitHub
                 </a>
-              )}
+                {project.liveUrl && (
+                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-small btn-cyan">
+                    <FiExternalLink style={{ marginRight: '6px' }} /> Live
+                  </a>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-    </section>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
 
